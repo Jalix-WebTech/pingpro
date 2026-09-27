@@ -1,0 +1,150 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-wa-green: #008069;
+  --color-wa-green-deep: #006b57;
+  --color-wa-green-bright: #00a884;
+  --color-wa-teal: #005c4b;
+  --color-wa-bg: #efeae2;
+  --color-wa-bg-dark: #0b141a;
+  --color-wa-panel-dark: #111b21;
+  --color-wa-bubble-out: #d9fdd3;
+  --color-wa-bubble-out-dark: #005c4b;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Roboto,
+    "Inter", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overscroll-behavior: none;
+}
+
+/* Chat wallpaper doodle (WhatsApp-like) */
+.wa-wallpaper {
+  background-color: #efeae2;
+  background-image: url("data:image/svg+xml,%3Csvg width='120' height='120' viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23d1c9bb' stroke-width='1.1' opacity='0.55'%3E%3Ccircle cx='18' cy='22' r='7'/%3E%3Cpath d='M48 12 l7 12 12 2-9 8 3 12-11-6-10 7 2-12-9-8 12-2z'/%3E%3Ccircle cx='95' cy='20' r='3'/%3E%3Cpath d='M12 62 q6 -6 12 0 t12 0'/%3E%3Crect x='70' y='55' width='16' height='12' rx='6'/%3E%3Cpath d='M100 70 l10 6-10 6z'/%3E%3Ccircle cx='30' cy='100' r='2.5'/%3E%3Ccircle cx='88' cy='100' r='5'/%3E%3Cpath d='M52 88 q8 8 16 0'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+.wa-wallpaper-dark {
+  background-color: #0b141a;
+  background-image: url("data:image/svg+xml,%3Csvg width='120' height='120' viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%2323312e' stroke-width='1.1' opacity='0.9'%3E%3Ccircle cx='18' cy='22' r='7'/%3E%3Cpath d='M48 12 l7 12 12 2-9 8 3 12-11-6-10 7 2-12-9-8 12-2z'/%3E%3Ccircle cx='95' cy='20' r='3'/%3E%3Cpath d='M12 62 q6 -6 12 0 t12 0'/%3E%3Crect x='70' y='55' width='16' height='12' rx='6'/%3E%3Cpath d='M100 70 l10 6-10 6z'/%3E%3Ccircle cx='30' cy='100' r='2.5'/%3E%3Ccircle cx='88' cy='100' r='5'/%3E%3Cpath d='M52 88 q8 8 16 0'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* Slim scrollbars like WhatsApp */
+.wa-scroll::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+.wa-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+.wa-scroll::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: 999px;
+}
+.dark .wa-scroll::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Message animations */
+@keyframes wa-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+.wa-msg-in {
+  animation: wa-in 0.18s ease-out both;
+}
+
+@keyframes wa-typing-bounce {
+  0%,
+  60%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.5;
+  }
+  30% {
+    transform: translateY(-4px);
+    opacity: 1;
+  }
+}
+.wa-typing-dot {
+  animation: wa-typing-bounce 1.2s infinite;
+}
+
+@keyframes wa-pulse-ring {
+  0% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1.8);
+    opacity: 0;
+  }
+}
+.wa-pulse-ring {
+  animation: wa-pulse-ring 1.6s ease-out infinite;
+}
+
+@keyframes wa-status-progress {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes wa-toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.wa-toast-in {
+  animation: wa-toast-in 0.2s ease-out both;
+}
+
+/* Bubble tails */
+.wa-tail-in::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -7px;
+  border: 4px solid transparent;
+  border-top-color: inherit;
+  border-right-color: inherit;
+}
+.wa-tail-out::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: -7px;
+  border: 4px solid transparent;
+  border-top-color: inherit;
+  border-left-color: inherit;
+}
